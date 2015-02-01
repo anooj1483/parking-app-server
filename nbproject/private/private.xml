@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Synclovis/workspace/ParkingAppServer/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Synclovis/workspace/ParkingAppServer/src/java/com/collaborativeclouds/workers/ParkingData.java</file>
+            <file>file:/C:/Synclovis/workspace/ParkingAppServer/src/java/com/collaborativeclouds/utils/hibernate.reveng.xml</file>
+            <file>file:/C:/Synclovis/workspace/ParkingAppServer/src/java/com/collaborativeclouds/workers/UserOperations.java</file>
+            <file>file:/C:/Synclovis/workspace/ParkingAppServer/src/java/com/collaborativeclouds/rest/ParkingResource.java</file>
+            <file>file:/C:/Synclovis/workspace/ParkingAppServer/src/java/com/collaborativeclouds/mappers/Parking.java</file>
+        </group>
+    </open-files>
+</project-private>
