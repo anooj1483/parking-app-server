@@ -108,6 +108,26 @@ public class ParkingResource {
                 return "Failed";
             }
     }
+    
+    @POST
+    @Path("/deleteslot/")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public String removeSlot(String userInfo, @Context HttpHeaders headers) throws JSONException {
+        try{
+        String username = headers.getRequestHeader("username").get(0);
+            UserOperations mOperations = new UserOperations();
+        if (mOperations.isValidUserName(username)) {
+            ParkingData mData   =   new ParkingData();
+            String status   =   mData.removeSlotofUser(username,userInfo);
+            return status;
+        }else{
+            return "Failed";
+        }
+        }catch(Exception e){
+            return "Failed";
+        }
+    }
     /**
      * PUT method for updating or creating an instance of ParkingResource
      *

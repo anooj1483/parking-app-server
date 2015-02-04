@@ -11,11 +11,14 @@ import com.google.gson.Gson;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import org.hibernate.Criteria;
+//import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,7 +48,7 @@ public class ParkingData {
         }
     }
     
-    public String getSlotofUser(String username) {
+    public String getSlotofUser_org(String username) {
         try {
             SessionFactory sessFact = new Configuration().configure().buildSessionFactory();
             mSession = sessFact.openSession();
@@ -60,20 +63,45 @@ public class ParkingData {
         }
     }
     
-        /*public String removeSlotofUser(String userInfo) {
+    public String getSlotofUser(String username) {
         try {
             SessionFactory sessFact = new Configuration().configure().buildSessionFactory();
             mSession = sessFact.openSession();
             mTransaction = mSession.beginTransaction();
             List<Parking> mPark = null;
-            Query getParkData = mSession.createQuery("from Parking where username='"+username+"'");
-            mPark = (List<Parking>) getParkData.list();
+            Criteria mCriteria = mSession.createCriteria(Parking.class);
+            mCriteria.add(Restrictions.like("username", username));
+            mPark = mCriteria.list();
             String json = new Gson().toJson(mPark);
             return json;
         } catch (Exception ex) {
             return "Failed";
         }
-    }*/
+    }
+    
+        public String removeSlotofUser(String username,String code) {
+        try {
+            SessionFactory sessFact = new Configuration().configure().buildSessionFactory();
+            mSession = sessFact.openSession();
+            mTransaction = mSession.beginTransaction();
+            String status = "Failed";
+            JSONObject mObject = new JSONObject(code);
+            String mCode = mObject.getString("code");
+
+            List<Parking> mPark = null;
+            Query getParkData = mSession.createQuery("from Parking where username='"+username+"' and code='"+mCode+"'");
+            mPark = (List<Parking>) getParkData.list();
+            
+            if(mPark.size() > 0){
+                mSession.delete(mPark.get(0));
+                mTransaction.commit();
+                status="Success";
+            }
+            return status;
+        } catch (Exception ex) {
+            return "Failed";
+        }
+    }
 
     public String bookSlot(String Slotnum, String username) throws JSONException {
 
